@@ -15,14 +15,14 @@ import (
 func main() {
 	csvFileName := "cities.csv"
 	distributerMap := make(models.DistributerMap)
-	countryStateMap := make(models.CountryMap)
+	countryStateCityMap := make(models.CountryMap)
 
-	err := helpers.CSVDataFetch(csvFileName, countryStateMap)
+	err := helpers.CSVDataFetch(csvFileName, countryStateCityMap)
 	if err != nil {
 		log.Fatalf("error making Data Store: %v", err)
 	}
 
-	ConvertCSVDatatoMap(countryStateMap, distributerMap)
+	ConvertCSVDatatoMap(countryStateCityMap, distributerMap)
 
 	var distributers []string
 	for k := range distributerMap {

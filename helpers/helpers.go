@@ -8,7 +8,7 @@ import (
 	"strings"
 )
 
-func CSVDataFetch(csvFileName string, countryStateMap models.CountryMap) error {
+func CSVDataFetch(csvFileName string, countryStateCityMap models.CountryMap) error {
 	/* lines, err := csvreder(csvFileName)
 	if err != nil {
 		log.Fatalf("error reading all lines: %v", err)
@@ -21,10 +21,10 @@ func CSVDataFetch(csvFileName string, countryStateMap models.CountryMap) error {
 			// skip header line
 			continue
 		}
-		sMap, cok := countryStateMap[line[5]]
-		if cok {
-			ctMap, stok := sMap[line[4]]
-			if stok {
+		sMap, ok := countryStateCityMap[line[5]]
+		if ok {
+			ctMap, ok := sMap[line[4]]
+			if ok {
 				ctMap[line[3]] = models.City{
 					CityCode:     line[0],
 					ProvinceCode: line[1],
@@ -58,7 +58,7 @@ func CSVDataFetch(csvFileName string, countryStateMap models.CountryMap) error {
 			},
 			}
 			stateM := map[string]models.CityMap{line[4]: cityMa}
-			countryStateMap[line[5]] = stateM
+			countryStateCityMap[line[5]] = stateM
 		}
 	}
 	return err
